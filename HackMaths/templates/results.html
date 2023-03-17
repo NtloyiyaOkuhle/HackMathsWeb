@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Math Problem Solver</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/* Global Styles */
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 2.0;
+			color: #333;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			text-align: center;
+		}
+		h1 {
+			font-size: 36px;
+			margin-bottom: 20px;
+			color: #4CAF50;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+		}
+		p .typewriter {
+			overflow: hidden; /* Hide overflow of text */
+			text-indent: 30px;
+			text-transform: uppercase;
+			font-family: monospace; /* Use a monospace font for typewriter effect */
+			font-size: 8px;
+			color: #333;
+			line-height: 1.5;
+		}
+		p .moreinfo {
+		  font-size: 14px;
+		  font-weight: bold;
+		  color: #333;
+		  padding: 10px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  margin-top: 20px;
+		}
+		.explanation {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		    font-family: cursive, sans-serif;
+			background-color: #2ecc71;
+			color: white;
+			padding: 10px;
+			border-radius: 4px;
+			box-shadow: 2px 2px 20px 23px #7fecad;
+			margin-bottom: 20px;
+		}
+		.disclaimer {
+			font-size: 14px;
+			font-style: italic;
+			color: #666;
+			padding: 10px;
+			border: 1px solid #ccc;
+			background-color: #f2f2f2;
+			margin: 10px 0;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20px;
+		}
+		label {
+			font-size: 10px;
+			margin-bottom: 10px;
+		}
+		input[type="text"],
+		textarea {
+			padding: 10px;
+			font-size: 12px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			width: 60%;
+			margin-bottom: 10px;
+		}
+		button {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			font-size: 15px;
+			border: none;
+			border-radius: 2px;
+			cursor: pointer;
+			margin-bottom: 10px;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+		.comments {
+			margin-top: 20px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 8px;
+			width: 60%;
+			max-height: 300px;
+			overflow-y: scroll;
+			border: 1px solid transparent; /* Removes margin collapse */
+			margin: 0 auto;
+		}
+		.comment {
+			margin-bottom: 10px;
+		}
+		.comment span {
+			color: rgba(0, 0, 0, 0.5);
+			margin-left: 10px;
+			font-weight: bold;
+			margin-right: 10px;
+		}
+		/* Typewriter animation keyframe rules */
+		@keyframes typing {
+			from {
+				width: 0; /* Start with no width */
+			}
+			to {
+				width: 100%; /* End with full width */
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Math Problem Solver</h1>
+		{% if explanation %}
+			<div class="explanation">
+				<p class="typewriter">{{ explanation }}</p>
+			</div>
+			<p class = "moreinfo">{{ more_examples }}<p>
+			<br>
+		{% else %}
+			<p>No solution found.</p>
+		{% endif %}
+		<form method="POST" action="/">
+			<p class="disclaimer">As a program in trial , I may make mistakes,help me improve by leaving comments..</p>
+			<label for="problem">Problem:</label>
+			<input type="text" id="problem" name="problem" required>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" required>
+			<label for="comment">Comment:</label>
+			<textarea id="comment" name="comment" required></textarea>
+			<button type="submit">Add Comment</button>
+		</form>
+
+		<button id="view-comments-btn">View Comments</button>
+		<div class="comments" id="comments" style="display: none;">
+			{% for comment in comments %}
+				<div class="comment">
+					<span>{{ comment[0] }}</span>
+					<span>{{ comment[1] }}</span>
+					<span>{{ comment[2] }}</span>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+<script>
+	const viewCommentsBtn = document.getElementById('view-comments-btn');
+	const commentsDiv = document.getElementById('comments');
+
+	viewCommentsBtn.addEventListener('click', () => {
+		commentsDiv.style.display = 'block';
+		viewCommentsBtn.style.display = 'none';
+	});
+</script>
+
+</body>
+</html>
+
+
